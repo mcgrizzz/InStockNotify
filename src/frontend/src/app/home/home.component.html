@@ -1,0 +1,57 @@
+
+<ul uk-accordion="multiple: true" class="uk-box-shadow-medium uk-padding-small uk-background-primary uk-margin-medium-top">
+    <li *ngFor="let product of activeProducts">
+        <a class="uk-accordion-title" href="#">
+            <div class="uk-column-1-4 uk-light">
+                <p>{{product.name}}</p>
+
+                <!--Display in stock in green or out of stock in grey-->
+                <p *ngIf="isStocked(product)">
+                    <span class="uk-text-success">In Stock</span>
+                </p>
+
+                <p *ngIf="!isStocked(product)">
+                    <span class="uk-text-muted">Out of stock</span>
+                </p>
+
+                <!--Display price or N/A if no active in stock-->
+                <p *ngIf="getPrice(product) as price; else elseBlock">
+                    {{price | currency}}
+                </p>
+                <ng-template #elseBlock><p>N/A</p></ng-template>
+                
+                <p>{{getLastStocked(product) | date }}</p>
+            </div>
+            <div class="divider div-transparent"></div>
+        </a>
+        <div class="uk-accordion-content uk-margin-remove-top uk-background-secondary">
+            <div class="uk-container uk-padding-small uk-padding-remove-top uk-light uk-outline">
+                <table class="uk-table uk-table-divider uk-table-justify">
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Status</th>
+                            <th>Last Price</th>
+                            <th>Last Stocked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let trackerData of product.activeTrackers">
+                            <td><a href="{{trackerData.url}}">{{getHostName(trackerData.url)}}</a></td>
+
+                            <td *ngIf="trackerData.stocked">
+                                <span class="uk-text-success">In Stock</span>
+                            </td>
+                            <td *ngIf="!trackerData.stocked">
+                                <span class="uk-text-muted">Out of stock</span>
+                            </td>
+
+                            <td>{{trackerData.lastPrice | currency}}</td>
+                            <td>{{trackerData.lastStocked | date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </li>
+</ul>

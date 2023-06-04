@@ -1,0 +1,24 @@
+{
+  "name": "backend-stock-notify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "*",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.0",
+    "node-fetch": "^2.6.11",
+    "puppeteer": "19.5.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

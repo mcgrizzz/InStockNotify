@@ -1,0 +1,57 @@
+ /* Custom SCSS/SASS Files */
+ @import 'variables';
+ @import 'mixins';
+ @import 'custom';
+ /* UIKit */
+ @import "variables-theme.scss";
+ @import "mixins-theme.scss";
+ @import "uikit-theme.scss";
+
+ body {
+    min-height: 100vh;
+ }
+
+ .archived {
+   color: rgb(255, 130, 130);
+ }
+
+ .uk-notification-message {
+    background-color: $global-secondary-background;
+ }
+
+ ul, .outline, .uk-notification-message {
+    border-radius: 3px;
+    border: solid 1px hsla(0, 0%, 20%, 1);
+ }
+
+ .divider
+{
+  position: relative;
+  height: 1px;
+}
+
+li.uk-togglabe-enter > .uk-accordion-title > .div-transparent:before, li.uk-open > .uk-accordion-title > .div-transparent:before {
+    width: 0%;
+    margin-left: 50%;
+    transition: 300ms;
+}
+
+li.uk-togglabe-leave > .uk-accordion-title > .div-transparent:before, .div-transparent:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    margin-left: 0%;
+    width: 100%;
+    min-height: 1px;
+    height: 1px !important;
+    background-image: linear-gradient(to right, hsla(0, 0%, 20%, 1), hsla(0, 0%, 18%, 1), hsla(0, 0%, 20%, 1));
+    transition: 300ms;
+}
+
+li.uk-togglabe-enter > .uk-accordion-title > div > p > .expand-info, li.uk-open > .uk-accordion-title > div > p > .expand-info {
+    opacity: 0;
+}
+ 
+ .uk-accordion-content {
+    border-radius: 3px;    
+ }

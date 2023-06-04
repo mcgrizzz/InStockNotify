@@ -1,0 +1,58 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="uk-section uk-height-viewport uk-background-primary">
+    <div class="uk-container uk-container-large uk-panel">
+
+        <nav class="uk-navbar-container uk-navbar-transparent uk-light" uk-navbar>
+            <div class="uk-navbar-left uk-margin-small">
+                <ul class="uk-navbar-nav uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-justify">
+                    <li [ngClass]="{'uk-active': router.url === '/dashboard'}">
+                        <a routerLink="/" href="">
+                            <span class="uk-icon" uk-icon="icon: bolt"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <!--<li>
+                        <a href="">
+                            <span class="uk-icon uk-margin-small-left" uk-icon="icon: history"></span>
+                            Archive
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+
+            <div class="uk-navbar-center uk-margin-remove-top">
+                <h1 class="uk-text-muted uk-dark uk-text-dark" *ngIf="router.url === '/dashboard'">Dashboard</h1>
+                <h1 class="uk-text-muted" *ngIf="router.url === '/manage-products'">Manage Products</h1>
+                <h1 class="uk-text-muted" *ngIf="router.url === '/manage-trackers'">Manage Trackers</h1>
+            </div>
+
+
+            <div class="uk-navbar-right uk-margin-small">
+                <ul class="uk-navbar-nav uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-justify">
+                    <li [ngClass]="{'uk-active': router.url === '/manage-products'}">
+                        <a routerLink="/manage-products" href="">
+                            <span class="uk-icon uk-margin-small-left" uk-icon="icon: settings"></span>
+                            Products
+                        </a>
+                    </li>
+                    <li [ngClass]="{'uk-active': router.url === '/manage-trackers'}">
+                        <a routerLink="/manage-trackers" href="">
+                            <span class="uk-icon uk-margin-small-left" uk-icon="icon: settings"></span>
+                            Trackers
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
