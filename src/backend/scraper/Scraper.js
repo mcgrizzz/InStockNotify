@@ -34,6 +34,10 @@ class Scraper {
             headless: 'new'
         }
 
+        if(process.env.SCRAPER_PROXY){
+            options["args"] = [`--proxy-server=${process.env.SCRAPER_PROXY}`];
+        }
+
         this.browser = await puppeteer.launch(options);
 
         this.page = (await this.browser.pages())[0];

@@ -24,16 +24,14 @@ const options = {
 
 let availableServers = [];
 
-let switchDelay = 5*60*1000;
-let updateDelay = 6*switchDelay;
+let switchDelay = 5*60*1000; //5 mins
+let updateDelay = 20*60*1000; //60 mins 
 
 const sleep = function (ms){
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
 }
-
-
 
 const updateServerList = async function() {
     console.log("Updating server list...");
@@ -42,8 +40,11 @@ const updateServerList = async function() {
         result = await result.json();
         if(result){
             result = result.filter(entry => { 
-                return entry.country == "United States"
-            }).map(entry => entry.name);
+                return entry.country == "United States" && entry.load <= 4
+            }).sort((a, b) => a.load - b.load);
+            result = result.map(entry => {
+                return {load: entry.load, serverName: entry.name}
+            });
             availableServers = result;
         }
     }catch(err){
@@ -73,8 +74,8 @@ const runNordCmd = async function(serverName){
 const switchServer = async function(){
     if(availableServers.length > 0){
         const randomServer = availableServers[Math.floor(Math.random()*availableServers.length)];
-        console.log(`Switching Server to ${randomServer}`);
-        runNordCmd(randomServer);
+        console.log(`Switching Server to ${randomServer.serverName} with load (${randomServer.load})`);
+        runNordCmd(randomServer.serverName);
     }else{
         console.log("No servers available...");
     }

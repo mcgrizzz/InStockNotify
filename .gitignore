@@ -18,3 +18,7 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+#Docker secrets
+**/docker/config/nord-user.txt
+**/docker/config/nord-pass.txt

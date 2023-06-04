@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   mongo:
     image: mongo
     restart: always
@@ -33,6 +32,23 @@ services:
         condition: service_healthy
     secrets:
       - mongo-root-pass
+  gluetun:
+    image: qmcgaw/gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      VPN_SERVICE_PROVIDER: nordvpn
+      OPENVPN_USER_SECRETFILE: /run/secrets/nord-user
+      OPENVPN_PASSWORD_SECRETFILE: /run/secrets/nord-pass
+      SERVER_REGIONS: "United States"
+      HTTPPROXY: on
+      HTTPPROXY_LOG: on
+    ports:
+      - 8888:8888/tcp
+    secrets:
+      - nord-user
+      - nord-pass
+
   web:
     build: 
       context: ../
@@ -44,15 +60,24 @@ services:
       MONGO_PASS_FILE: /run/secrets/mongo-root-pass
       MONGO_DB_NAME: stock-notify
       SCRAPER_ENABLED: "true"
+      SCRAPER_PROXY: "http://gluetun:8888"
     ports:
       - "5500:8080"
     depends_on:
       mongo:
         condition: service_healthy
+      gluetun:
+        condition: service_healthy
     secrets:
       - mongo-root-pass
     cap_add:
       - SYS_ADMIN
+
+
 secrets:
   mongo-root-pass:
     file: ./config/mongo-root-pass.txt
+  nord-user:
+    file: ./config/nord-user.txt
+  nord-pass:
+    file: ./config/nord-pass.txt
