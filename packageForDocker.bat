@@ -1,6 +1,6 @@
 @echo off
 :: variables
-set baseDir=H:\Documents\Dev\HTML and Web\InStockNotify
+set baseDir=%cd%
 set distDir=%baseDir%\docker-ready
 
 set baseSrc=%baseDir%\src
