@@ -12,13 +12,25 @@ import { ServerResponse } from '@models/server-response';
 })
 
 export class DataService {
+  
+  
 
-  private apiUrl = environment.apiURL;
+  private apiUrl;
+  private productsUrl;
+  private trackersUrl;
 
-  private productsUrl = this.apiUrl + "/products";
-  private trackersUrl = this.apiUrl + "/trackers";
+  constructor(private http: HttpClient) {
+    if(!environment.production){
+      this.apiUrl = environment.baseUrl;
+    }else if(environment.baseUrl && environment.baseUrl != ''){
+      this.apiUrl = environment.baseUrl + "/api";
+    }else{
+      this.apiUrl = location.protocol + '//' + location.host + "/api";
+    }
 
-  constructor(private http: HttpClient) { }
+    this.productsUrl = this.apiUrl + "/products";
+    this.trackersUrl = this.apiUrl + "/trackers";
+   }
 
   getActiveProducts(): Observable<ProductData[]> {
     return this.http.get<ProductData[]>(this.productsUrl);

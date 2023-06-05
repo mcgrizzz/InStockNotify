@@ -14,11 +14,10 @@
                     <span class="uk-text-muted">Out of stock</span>
                 </p>
 
-                <!--Display price or N/A if no active in stock-->
-                <p *ngIf="getPrice(product) as price; else elseBlock">
-                    {{price | currency}}
+                <!--Display price-->
+                <p>
+                    {{getPrice(product) | currency}}
                 </p>
-                <ng-template #elseBlock><p>N/A</p></ng-template>
                 
                 <p>{{getLastStocked(product) | date }}</p>
             </div>

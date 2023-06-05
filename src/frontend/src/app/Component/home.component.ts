@@ -89,7 +89,7 @@ export class HomeComponent {
       }
     
     }
-    return (minStocked === Number.MAX_SAFE_INTEGER) ? min : minStocked;
+    return (minStocked === Number.MAX_SAFE_INTEGER) ? (min === Number.MAX_SAFE_INTEGER ? 0 : min) : minStocked;
   }
 
   getLastStocked(product: ProductData): Date {
