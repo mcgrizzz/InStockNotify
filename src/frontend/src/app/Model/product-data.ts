@@ -1,5 +1,5 @@
 
-import { TrackerData }from './tracker-data';
+import { TrackerData } from './tracker-data';
 
 export interface ProductData {
     _id: string;

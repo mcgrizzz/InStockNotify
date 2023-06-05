@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormArray, NonNullableFormBuilder, Validators, FormControl } from '@angular/forms';
-import { Tracker } from '../tracker';
-import { Condition } from '../condition';
-import { DataService } from '../data.service';
+import { FormGroup, FormArray, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Tracker } from '@models/tracker';
+import { Condition } from '@models/condition';
+import { DataService } from '@services/data.service';
 import UIKit from 'uikit';
 
 @Component({
   selector: 'app-trackers',
-  templateUrl: './trackers.component.html',
-  styleUrls: ['./trackers.component.scss']
+  templateUrl: '../../assets/html/trackers.component.html'
 })
 export class TrackersComponent {
 
@@ -17,7 +16,7 @@ export class TrackersComponent {
   forms: FormGroup[] = [];
   trackerIndex: number = 0;
 
-  constructor(private dataService: DataService, private fb: NonNullableFormBuilder){}
+  constructor(private dataService: DataService, private fb: NonNullableFormBuilder){};
 
   ngOnInit(): void {
     this.getData();

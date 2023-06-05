@@ -7,6 +7,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-root-pass
+    ports:
+      - 27017:27017
     secrets:
       - mongo-root-pass
     healthcheck:

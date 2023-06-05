@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from './../environments/environment';
+import { environment } from '@environments/environment';
 
-import { ProductData } from './product-data';
-import { Tracker } from './tracker';
-import { ServerResponse } from './server-response';
+import { ProductData } from '@models/product-data';
+import { Tracker } from '@models/tracker';
+import { ServerResponse } from '@models/server-response';
 
 @Injectable({
   providedIn: 'root'

@@ -1,15 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {interval} from "rxjs/internal/observable/interval";
 import {startWith, switchMap} from "rxjs/operators";
-import { ProductData } from '../product-data';
-import { TrackerData } from '../tracker-data';
-import { Tracker } from '../tracker';
-import { DataService } from '../data.service';
+import { ProductData } from '@models/product-data';
+import { TrackerData } from '@models/tracker-data';
+import { DataService } from '@services/data.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: '../../assets/html/home.component.html'
 })
 export class HomeComponent {
 
@@ -19,7 +17,7 @@ export class HomeComponent {
   
   sortDir: number = 1;
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService){};
 
   ngOnInit(): void {
     this.getActiveProducts();

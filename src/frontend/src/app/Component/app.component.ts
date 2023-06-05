@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: '../../assets/html/app.component.html',
+  styleUrls: ['../../styles/app.component.scss']
 })
 export class AppComponent {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) { };
 
   title = 'stock-notify';
 }
