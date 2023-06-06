@@ -19,7 +19,7 @@
                     {{getPrice(product) | currency}}
                 </p>
                 
-                <p>{{getLastStocked(product) | date }}</p>
+                <p title="{{getLastStocked(product) | date:'long' }}">{{getLastStocked(product) | date }}</p>
             </div>
             <div class="divider div-transparent"></div>
         </a>
@@ -46,7 +46,7 @@
                             </td>
 
                             <td>{{trackerData.lastPrice | currency}}</td>
-                            <td>{{trackerData.lastStocked | date}}</td>
+                            <td title="{{trackerData.lastStocked | date:'long' }}">{{trackerData.lastStocked | date}}</td>
                         </tr>
                     </tbody>
                 </table>

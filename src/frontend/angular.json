@@ -72,6 +72,20 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "dev-local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development-local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -84,6 +98,9 @@
             },
             "development": {
               "browserTarget": "stock-notify:build:development"
+            },
+            "dev-local": {
+              "browserTarget": "stock-notify:build:dev-local"
             }
           },
           "defaultConfiguration": "development"
