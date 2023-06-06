@@ -76,6 +76,7 @@ export class TrackersComponent {
         this.trackers.push(newTracker);
         const trackerForm = this.createTrackerForm(newTracker);
         this.forms.push(trackerForm);
+        this.dataService.updateSubscribers();
       },
 
       error: (err) => {
@@ -111,14 +112,9 @@ export class TrackersComponent {
       negative.push(conditionObj);
     }
 
-    console.log(positive);
-    console.log(negative);
-    console.log(tracker.rateLimit);
 
     tracker.conditionsPositive = positive;
     tracker.conditionsNegative = negative;
-
-    console.log(tracker);
 
     //Send new productData to update
     this.dataService.updateTracker(tracker).subscribe({

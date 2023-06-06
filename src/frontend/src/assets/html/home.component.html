@@ -53,4 +53,9 @@
             </div>
         </div>
     </li>
+    <li *ngIf="activeProducts.length == 0">
+        <div class="uk-column-1-1 uk-light uk-margin-medium-top uk-margin-medium-bottom">
+            <h3 class="uk-heading-line uk-text-center"><span>No Active Products</span></h3>
+        </div>
+    </li>
 </ul>

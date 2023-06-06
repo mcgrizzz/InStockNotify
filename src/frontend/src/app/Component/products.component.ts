@@ -85,6 +85,7 @@ export class ProductsComponent {
         this.products.push(newProduct);
         const productForm = this.createProductForm(newProduct);
         this.forms.push(productForm);
+        this.dataService.updateSubscribers();
       },
 
       error: (err) => {

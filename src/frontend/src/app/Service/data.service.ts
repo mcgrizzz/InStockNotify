@@ -13,11 +13,11 @@ import { ServerResponse } from '@models/server-response';
 
 export class DataService {
   
-  
-
   private apiUrl;
   private productsUrl;
   private trackersUrl;
+
+  private subscribers: Function[] = [];
 
   constructor(private http: HttpClient) {
     if(!environment.production){
@@ -46,20 +46,34 @@ export class DataService {
   }
 
   createNewProduct(): Observable<ProductData> {
-    return this.http.post<ProductData>(this.productsUrl, {});
+    const obs: Observable<ProductData> = this.http.post<ProductData>(this.productsUrl, {});
+    return obs;
   }
 
   createNewTracker(): Observable<Tracker> {
-    return this.http.post<Tracker>(this.trackersUrl, {});
+    const obs: Observable<Tracker> = this.http.post<Tracker>(this.trackersUrl, {});
+    return obs;
   }
 
   updateProduct(product: ProductData): Observable<ProductData> {
-    return this.http.put<ProductData>(this.productsUrl + "/" + product._id, product);
+    const obs: Observable<ProductData> = this.http.put<ProductData>(this.productsUrl + "/" + product._id, product);
+    return obs;
   }
 
   updateTracker(tracker: Tracker): Observable<Tracker> {
-    return this.http.put<Tracker>(this.trackersUrl + "/" + tracker._id, tracker);
+    const obs: Observable<Tracker> = this.http.put<Tracker>(this.trackersUrl + "/" + tracker._id, tracker);
+    return obs;
   }
 
-  
+  updateSubscribers(): void {
+    for(let i = 0; i < this.subscribers.length; i++){
+      const fn: Function = this.subscribers[i];
+      fn();
+    }
+  }
+
+  subscribeUpdates(callback: Function): void {
+    this.subscribers.push(callback);
+  }
+
 }

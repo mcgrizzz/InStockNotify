@@ -38,14 +38,14 @@
                 <ul class="uk-navbar-nav uk-padding-small uk-padding-remove-top uk-padding-remove-bottom uk-justify">
                     <li [ngClass]="{'uk-active': router.url === '/manage-products'}">
                         <a routerLink="/manage-products" href="">
-                            <span class="uk-icon uk-margin-small-left" uk-icon="icon: settings"></span>
-                            Products
+                            <span class="uk-icon uk-margin-small-left"></span>
+                            Products <span class="uk-badge">{{products}}</span>
                         </a>
                     </li>
                     <li [ngClass]="{'uk-active': router.url === '/manage-trackers'}">
                         <a routerLink="/manage-trackers" href="">
-                            <span class="uk-icon uk-margin-small-left" uk-icon="icon: settings"></span>
-                            Trackers
+                            <span class="uk-icon uk-margin-small-left"></span>
+                            Trackers <span class="uk-badge">{{trackers}}</span>
                         </a>
                     </li>
                 </ul>

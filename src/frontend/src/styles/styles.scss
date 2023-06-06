@@ -11,6 +11,11 @@
     min-height: 100vh;
  }
 
+ .uk-badge {
+   background-color: $global-primary-background !important;
+   border: solid 1px hsla(0, 0%, 20%, 1);
+ }
+
  .archived {
    color: rgb(255, 130, 130);
  }
