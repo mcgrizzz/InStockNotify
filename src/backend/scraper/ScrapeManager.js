@@ -174,37 +174,55 @@ class ScrapeManager {
     //TODO
     async productUpdated(product){
         if(!this.isSetup)return;
-        console.log("ScrapeManager: Product Settings Updated [" + product.name + "]");
+        console.log("ScrapeManager: Product Settings Updating [" + product.name + "]");
         //Check for new trackers that don't have a scraper running
-        const activeTrackers = product.activeTrackers.filter(trackerData => {
-            return !(trackerData.tracker in this.scrapers);
+        console.log("ScrapeManager: Checking for inactive scrapers...");
+        let uninitializedTrackers = product.activeTrackers.map((trackerData => trackerData.tracker.toString())).filter((tracker) => {
+            return !(tracker in this.scrapers);
         });
 
+        uninitializedTrackers = [...new Set(uninitializedTrackers)]; //Remove duplicates
+
         //Sets up new trackers so the next code block doesn't need any more adjustment
-        if(activeTrackers.length > 0){
-            activeTrackers.forEach(async (trackerData) => {
-                if(trackerData.tracker in this.scrapers)return; //Don't add duplicates
-                const scraper = await this.setupScraperById(trackerData.tracker);
-                scraper.initialize();
+        if(uninitializedTrackers.length > 0){
+            console.log(`ScrapeManager: Need to initialize ${uninitializedTrackers.length} tracker(s)`);
+            const promises = [];
+            const queuedInits = [];
+            uninitializedTrackers.forEach((tracker) => {
+                const initPromise = new Promise((resolve, reject) => {
+                    (async () => {
+                        console.log(`ScrapeManager: Trying to initialize (${tracker})`);
+                        if(tracker in this.scrapers)return; //Don't add duplicates
+                        console.log(`ScrapeManager: Tracker is not already initialized, setting up.`);
+                        queuedInits.push(tracker);
+                        const scraper = await this.setupScraperById(tracker);
+                        await scraper.initialize();
+                        resolve();
+                    })();
+                });
+                
+                promises.push(initPromise);
             });
+
+            //Wait for all before continuing...
+            await Promise.all(promises);
         }
+        
+        
 
         //Updating tracker data and deleting tracker data are both taken care of in scraper.updateProduct()
         for(let i = 0; i < Object.keys(this.scrapers).length; i++){
             const [trackerID, scraper] = Object.entries(this.scrapers).at(i);
+            console.log(`ScrapeManager: Trying to update product in [${scraper.tracker.name}] scraper`);
             const productsRemaining = scraper.updateProduct(product);
             if(productsRemaining == 0){
+                console.log(`ScrapeManager: [${scraper.tracker.name}] has no active products anymore, shutting down...`);
                 //Shut this scraper down...
                 if(this.removeTracker(trackerID)){
                     i--;
                 }
             } 
         }
-
-
-        
-
-
     }
 
     //Did any of the parameters change (positives, negatives, selectors, scrape rate etc)

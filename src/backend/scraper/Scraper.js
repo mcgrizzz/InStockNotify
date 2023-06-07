@@ -28,6 +28,8 @@ class Scraper {
 
     async initialize(){
 
+        console.log(`Scraper[${this.tracker.name}]: Initializing...`);
+
         puppeteer.use(StealthPlugin());
 
         const options = {
@@ -94,7 +96,6 @@ class Scraper {
     deleteProduct(product){
         if(this.hasProduct(product._id)){
             const trackerDataKeys = Object.keys(this.products[product._id]);
-            console.log(trackerDataKeys);
             for(let i = 0; i < trackerDataKeys.length; i++){
                 this.deleteScrapeData(product._id, trackerDataKeys[i]);
             }
